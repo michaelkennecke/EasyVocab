@@ -39,6 +39,12 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void deleteTranslation(int index) {
+    this.setState(() {
+      translations.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +61,9 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: <Widget>[
           TranslationInputWidget(this.newTranslation),
-          Expanded(child: TranslationList(this.translations)),
+          Expanded(
+              child:
+                  TranslationList(this.translations, this.deleteTranslation)),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -147,9 +155,10 @@ class _TranslationInputWidgetState extends State<TranslationInputWidget> {
 
 class TranslationList extends StatefulWidget {
   final List<Translation> listItems;
+  final Function(int) callback;
 
   // constructor
-  TranslationList(this.listItems);
+  TranslationList(this.listItems, this.callback);
 
   @override
   _TranslationListState createState() => _TranslationListState();
@@ -164,16 +173,27 @@ class _TranslationListState extends State<TranslationList> {
       itemBuilder: (BuildContext context, int index) {
         var translation = this.widget.listItems[index];
         return Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                translation.word,
-                style: TextStyle(fontSize: 20),
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      translation.word,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Text(
+                      translation.wordTranslated,
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ],
+                ),
               ),
-              Text(
-                translation.wordTranslated,
-                style: TextStyle(fontSize: 15),
+              IconButton(
+                //alignment: Alignment.centerRight,
+                icon: Icon(Icons.delete),
+                onPressed: () => widget.callback(index),
               ),
             ],
           ),
