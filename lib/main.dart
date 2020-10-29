@@ -1,7 +1,16 @@
+import 'package:easy_vocab/translation_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => TranslationModel()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -33,20 +42,11 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void newTranslation(String word, String wordTranslated) {
-    this.setState(() {
-      translations.add(new Translation(word, wordTranslated));
-    });
-  }
-
-  void deleteTranslation(int index) {
-    this.setState(() {
-      translations.removeAt(index);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    //gives you the instance of the Provider which gives you access to the model object
+    final translator = Provider.of<TranslationModel>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Easy Vocab"),
@@ -60,10 +60,11 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: <Widget>[
-          TranslationInputWidget(this.newTranslation),
+          TranslationInputWidget(translator.newTranslation),
           Expanded(
-              child:
-                  TranslationList(this.translations, this.deleteTranslation)),
+            child: TranslationList(
+                translator.translations, translator.removeTranslation),
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
