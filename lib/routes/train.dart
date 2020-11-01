@@ -11,10 +11,54 @@ class TrainPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Easy Vocab"),
       ),
-      body: Center(
-        child: Text("Train Page"),
-      ),
+      body: TrainCards(),
       bottomNavigationBar: Footer(),
+    );
+  }
+}
+
+class TrainCards extends StatefulWidget {
+  @override
+  _TrainCardsState createState() => _TrainCardsState();
+}
+
+class _TrainCardsState extends State<TrainCards> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            height: 120,
+            width: 180,
+            child: RaisedButton(
+              child: Text(
+                "Sample",
+                style: TextStyle(fontSize: 22),
+              ),
+              onPressed: () {},
+              color: Colors.cyan,
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                icon: Icon(Icons.arrow_back),
+                iconSize: 50,
+                onPressed: () => {},
+              ),
+              IconButton(
+                icon: Icon(Icons.arrow_forward),
+                iconSize: 50,
+                onPressed: () => {},
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
