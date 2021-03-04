@@ -1,4 +1,5 @@
 import 'package:easy_vocab/routes/home.dart';
+import 'package:easy_vocab/routes/test.dart';
 import 'package:easy_vocab/routes/train.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -6,7 +7,7 @@ import 'package:flutter/widgets.dart';
 class RouteGenerator {
   static const String homePage = '/';
   static const String trainPage = '/train';
-  static const String testPage = 'test';
+  static const String testPage = '/test';
 
   RouteGenerator._();
 
@@ -20,6 +21,11 @@ class RouteGenerator {
       case trainPage:
         return MaterialPageRoute(
           builder: (_) => const TrainPage(),
+        );
+
+      case testPage:
+        return MaterialPageRoute(
+          builder: (_) => const TestPage(),
         );
 
       default:

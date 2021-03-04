@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Easy Vocab Trainer"),
+        title: Text("Easy Vocabulary"),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.all_inbox),
@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
-          TranslationInputWidget(translator.newTranslation),
+          TranslationInputWidget(translator.addTranslation),
           Expanded(
             child: TranslationList(
                 translator.translations, translator.removeTranslation),
