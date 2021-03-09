@@ -1,7 +1,9 @@
+import 'package:easy_vocab/providers/box_model.dart';
+import 'package:easy_vocab/models/translation.dart';
+import 'package:easy_vocab/providers/exam_box_model.dart';
 import 'package:easy_vocab/widgets/footer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:easy_vocab/translation_model.dart';
 import 'package:easy_vocab/routes.dart';
 
 class HomePage extends StatelessWidget {
@@ -10,7 +12,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //gives you the instance of the Provider which gives you access to the model object
-    final translator = Provider.of<TranslationModel>(context, listen: true);
+    final boxModel = Provider.of<BoxModel>(context, listen: true);
+    final examBoxModel = Provider.of<ExamBoxModel>(context, listen: true);
 
     return Scaffold(
       appBar: AppBar(
@@ -32,10 +35,11 @@ class HomePage extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
-          TranslationInputWidget(translator.addTranslation),
+          TranslationInputWidget(
+              boxModel.addTranslation, examBoxModel.addTranslation),
           Expanded(
-            child: TranslationList(
-                translator.translations, translator.removeTranslation),
+            child: TranslationList(boxModel.box, boxModel.removeTranslation,
+                examBoxModel.removeTranslation),
           ),
         ],
       ),
@@ -51,17 +55,11 @@ class Box {
   bool selected = false;
 }
 
-class Translation {
-  String word;
-  String wordTranslated;
-
-  Translation(this.word, this.wordTranslated);
-}
-
 class TranslationInputWidget extends StatefulWidget {
   final Function(String, String) callback;
+  final Function(String, String) examBoxModelCallback;
 
-  TranslationInputWidget(this.callback);
+  TranslationInputWidget(this.callback, this.examBoxModelCallback);
 
   @override
   _TranslationInputWidgetState createState() => _TranslationInputWidgetState();
@@ -73,6 +71,8 @@ class _TranslationInputWidgetState extends State<TranslationInputWidget> {
 
   void click() {
     widget.callback(wordController.text, wordTranslatedController.text);
+    widget.examBoxModelCallback(
+        wordController.text, wordTranslatedController.text);
     FocusScope.of(context).unfocus();
     wordController.clear();
     wordTranslatedController.clear();
@@ -111,9 +111,10 @@ class _TranslationInputWidgetState extends State<TranslationInputWidget> {
 class TranslationList extends StatefulWidget {
   final List<Translation> listItems;
   final Function(int) callback;
+  final Function(int) examBoxModelCallback;
 
   // constructor
-  TranslationList(this.listItems, this.callback);
+  TranslationList(this.listItems, this.callback, this.examBoxModelCallback);
 
   @override
   _TranslationListState createState() => _TranslationListState();
@@ -147,7 +148,10 @@ class _TranslationListState extends State<TranslationList> {
               ),
               IconButton(
                 icon: Icon(Icons.delete),
-                onPressed: () => widget.callback(index),
+                onPressed: () => {
+                  widget.callback(index),
+                  widget.examBoxModelCallback(index)
+                },
               ),
             ],
           ),

@@ -25,6 +25,7 @@ class _FooterState extends State<Footer> {
     } else {
       setState(() {
         // _selectedIndex = index;
+        //Navigator.of(context).pushNamedAndRemoveUntil(_routes.elementAt(index), (route) => true);
         Navigator.of(context)?.pushNamed(_routes.elementAt(index));
       });
     }

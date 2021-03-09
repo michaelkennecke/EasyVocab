@@ -1,4 +1,5 @@
-import 'package:easy_vocab/translation_model.dart';
+import 'package:easy_vocab/providers/box_model.dart';
+import 'package:easy_vocab/providers/exam_box_model.dart';
 import 'package:easy_vocab/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +8,8 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => TranslationModel()),
+        ChangeNotifierProvider(create: (_) => BoxModel()),
+        ChangeNotifierProvider(create: (_) => ExamBoxModel()),
       ],
       child: MyApp(),
     ),

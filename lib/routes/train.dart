@@ -1,7 +1,7 @@
+import 'package:easy_vocab/providers/box_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import '../translation_model.dart';
 import 'package:flip_card/flip_card.dart';
 
 class TrainPage extends StatelessWidget {
@@ -9,22 +9,22 @@ class TrainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final translator = Provider.of<TranslationModel>(context, listen: true);
+    final boxModel = Provider.of<BoxModel>(context, listen: true);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Easy Vocabulary"),
+        title: Text("Casual Training"),
       ),
-      body: TrainCards(translator),
+      body: TrainCards(boxModel),
       // bottomNavigationBar: Footer(),
     );
   }
 }
 
 class TrainCards extends StatefulWidget {
-  final TranslationModel translator;
+  final BoxModel boxModel;
 
-  TrainCards(this.translator);
+  TrainCards(this.boxModel);
 
   @override
   _TrainCardsState createState() => _TrainCardsState();
@@ -38,27 +38,27 @@ class _TrainCardsState extends State<TrainCards> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            "${widget.translator.index + 1}/ ${widget.translator.translations.length}",
+            "${widget.boxModel.index + 1}/ ${widget.boxModel.box.length}",
             style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
           ),
           TranslationFlipCardWidget(
-              widget.translator.getTranslationAtCurrentIndex().word,
-              widget.translator.getTranslationAtCurrentIndex().wordTranslated),
+              widget.boxModel.getTranslationAtCurrentIndex().word,
+              widget.boxModel.getTranslationAtCurrentIndex().wordTranslated),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
                 icon: Icon(Icons.arrow_back),
                 iconSize: 50,
-                onPressed: () => widget.translator.getPreviousTranslation(),
+                onPressed: () => widget.boxModel.getPreviousTranslation(),
               ),
               IconButton(
                 icon: Icon(Icons.arrow_forward),
                 iconSize: 50,
-                onPressed: () => widget.translator.getNextTranslation(),
+                onPressed: () => widget.boxModel.getNextTranslation(),
               ),
             ],
           ),
