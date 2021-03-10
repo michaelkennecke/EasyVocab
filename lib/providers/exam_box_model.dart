@@ -39,15 +39,42 @@ class ExamBoxModel extends AbstractBoxModel {
     index = 0;
     box = unshuffledBox;
     isBoxShuffled = false;
+    answerStatus = 0;
     notifyListeners();
   }
 
   double getPercentageOfExamCompletion() {
-    return index / box.length;
+    double percentageOfExamCompletion = index / box.length;
+    if (!percentageOfExamCompletion.isNaN) {
+      return percentageOfExamCompletion;
+    } else {
+      return 0.0;
+    }
+  }
+
+  double getPercentageOfExamCompletionAfterAnswering() {
+    if (!(index + 1 >= box.length)) {
+      double percentageOfExamCompletion = index + 1 / box.length;
+      if (!percentageOfExamCompletion.isNaN) {
+        return percentageOfExamCompletion;
+      } else {
+        return 0.0;
+      }
+    } else {
+      return 1.0;
+    }
   }
 
   bool checkAnswer(String answer) {
     if (answer == this.getTranslationAtCurrentIndex().wordTranslated) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool isLastTraslationOfBox() {
+    if (index == box.length - 1) {
       return true;
     } else {
       return false;

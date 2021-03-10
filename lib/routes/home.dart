@@ -21,14 +21,14 @@ class HomePage extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.all_inbox),
-            onPressed: () =>
-                Navigator.of(context)?.pushNamed(RouteGenerator.trainPage),
+            onPressed: () => Navigator.of(context)
+                ?.pushNamed(RouteGenerator.boxSelectionPage),
             tooltip: "Boxes",
           ),
           IconButton(
             icon: const Icon(Icons.settings),
-            onPressed: () =>
-                Navigator.of(context)?.pushNamed(RouteGenerator.trainPage),
+            onPressed: () => Navigator.of(context)
+                ?.pushNamed(RouteGenerator.preferencesPage),
             tooltip: "Settings",
           ),
         ],

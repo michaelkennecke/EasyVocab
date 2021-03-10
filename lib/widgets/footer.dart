@@ -15,7 +15,7 @@ class _FooterState extends State<Footer> {
   final List<String> _routes = [
     RouteGenerator.homePage,
     RouteGenerator.trainPage,
-    RouteGenerator.testPage,
+    RouteGenerator.examPage,
   ];
 
   void _onItemTapped(int index) {
