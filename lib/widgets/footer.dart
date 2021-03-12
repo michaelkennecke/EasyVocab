@@ -11,7 +11,6 @@ class Footer extends StatefulWidget {
 }
 
 class _FooterState extends State<Footer> {
-  // int _selectedIndex = 0;
   final List<String> _routes = [
     RouteGenerator.homePage,
     RouteGenerator.trainPage,
@@ -19,13 +18,10 @@ class _FooterState extends State<Footer> {
   ];
 
   void _onItemTapped(int index) {
-    // Navigator.pushNamed(context, _routes[index]);
     if (index == 0) {
       return;
     } else {
       setState(() {
-        // _selectedIndex = index;
-        //Navigator.of(context).pushNamedAndRemoveUntil(_routes.elementAt(index), (route) => true);
         Navigator.of(context)?.pushNamed(_routes.elementAt(index));
       });
     }
@@ -51,6 +47,7 @@ class _FooterState extends State<Footer> {
       //currentIndex: _selectedIndex,
       onTap: _onItemTapped,
       iconSize: 30,
+      selectedItemColor: const Color(0xFFB81d4fa),
     );
   }
 }

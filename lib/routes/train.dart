@@ -16,7 +16,6 @@ class TrainPage extends StatelessWidget {
         title: Text("Casual Training"),
       ),
       body: TrainCards(boxModel),
-      // bottomNavigationBar: Footer(),
     );
   }
 }
@@ -89,7 +88,7 @@ class TranslationFlipCardWidget extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
-        color: Colors.cyan,
+        color: const Color(0xFFB81d4fa),
       ),
       back: Container(
         height: 180,
@@ -101,7 +100,7 @@ class TranslationFlipCardWidget extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
-        color: Colors.blueGrey,
+        color: const Color(0xFFB4ba3c7),
       ),
     );
   }

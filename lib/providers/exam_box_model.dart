@@ -54,7 +54,7 @@ class ExamBoxModel extends AbstractBoxModel {
 
   double getPercentageOfExamCompletionAfterAnswering() {
     if (!(index + 1 >= box.length)) {
-      double percentageOfExamCompletion = index + 1 / box.length;
+      double percentageOfExamCompletion = (index + 1) / box.length;
       if (!percentageOfExamCompletion.isNaN) {
         return percentageOfExamCompletion;
       } else {

@@ -141,7 +141,7 @@ class _ExamBodyState extends State<ExamBody> {
                   center: Text(
                       "${(percentageOfExamCompletion * 100).toStringAsFixed(0)} %"),
                   backgroundColor: Colors.grey,
-                  progressColor: Colors.cyan,
+                  progressColor: Color(0xFFB1DB6E0),
                   alignment: MainAxisAlignment.center,
                 ),
                 IconButton(
@@ -180,7 +180,15 @@ class _ExamBodyState extends State<ExamBody> {
                 this.answer(value),
               },
               decoration: InputDecoration(
-                prefixIcon: Icon(Icons.question_answer),
+                prefixIcon: Icon(
+                  Icons.question_answer,
+                  color: Colors.amberAccent,
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.amberAccent,
+                  ),
+                ),
                 hintText: "Enter your answer",
               ),
             ),
