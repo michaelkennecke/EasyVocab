@@ -21,10 +21,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Vocabulary.IO',
-      theme: ThemeData.dark(
-          //primarySwatch: Colors.blue,
-          ),
+      title: 'Deep Vocab',
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColorDark: Color(0xFFB81d4fa),
+      ),
       initialRoute: RouteGenerator.homePage,
       onGenerateRoute: RouteGenerator.generateRoute,
     );

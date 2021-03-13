@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Easy Vocabulary"),
+        title: Text("Deep Vocab"),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.all_inbox),
