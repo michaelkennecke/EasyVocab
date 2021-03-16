@@ -2,19 +2,18 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:easy_vocab/providers/box_collection_model.dart';
 
 import '../models/translation.dart';
 
 abstract class AbstractBoxModel with ChangeNotifier {
   String boxId;
-  List<Translation> _box = [];
+  List<Translation> box = [];
   int index = 0;
   SharedPreferences sharedPreferences;
 
-  List<Translation> get box => _box;
-
-  set box(List<Translation> box) {
-    box = box;
+  void setBoxIdFromSelectedBox(String name) {
+    boxId = name;
     notifyListeners();
   }
 
@@ -72,18 +71,23 @@ abstract class AbstractBoxModel with ChangeNotifier {
   }
 
   void loadData() async {
+    var tmpSelected = sharedPreferences.getString("selected");
+    if (tmpSelected == null || tmpSelected == "") {
+      boxId = BoxCollectionModel.DEFAULT_BOX_NAME;
+    } else {
+      boxId = tmpSelected;
+    }
     List<String> listString = sharedPreferences.getStringList(this.boxId);
     if (listString != null) {
       var tmpBox = listString
           .map((item) => Translation.fromMap(json.decode(item)))
           .toList();
-      for (var item in tmpBox) {
-        this.addTranslation(item.word, item.wordTranslated);
-      }
+      box = tmpBox;
     }
   }
 
   void saveData() {
+    sharedPreferences.setString("selected", boxId);
     List<String> stringList =
         this.box.map((item) => json.encode(item.toMap())).toList();
     sharedPreferences.setStringList(this.boxId, stringList);

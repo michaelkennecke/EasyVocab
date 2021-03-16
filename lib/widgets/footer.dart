@@ -1,8 +1,6 @@
 import 'package:easy_vocab/routes.dart';
 import 'package:flutter/material.dart';
 
-/// At the moment this class routes not perfectly
-
 class Footer extends StatefulWidget {
   const Footer();
 
@@ -36,7 +34,7 @@ class _FooterState extends State<Footer> {
           label: "Add",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.model_training),
+          icon: Icon(Icons.school), //model_training
           label: "Train",
         ),
         BottomNavigationBarItem(
@@ -44,7 +42,6 @@ class _FooterState extends State<Footer> {
           label: "Test",
         ),
       ],
-      //currentIndex: _selectedIndex,
       onTap: _onItemTapped,
       iconSize: 30,
       selectedItemColor: const Color(0xFFB81d4fa),

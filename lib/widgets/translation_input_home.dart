@@ -1,11 +1,14 @@
+import 'package:easy_vocab/providers/box_collection_model.dart';
 import 'package:flutter/material.dart';
 import 'package:translator/translator.dart';
 
 class TranslationInputWidget extends StatefulWidget {
   final Function(String, String) callback;
   final Function(String, String) examBoxModelCallback;
+  final BoxCollectionModel boxCollectionModel;
 
-  TranslationInputWidget(this.callback, this.examBoxModelCallback);
+  TranslationInputWidget(
+      this.callback, this.examBoxModelCallback, this.boxCollectionModel);
 
   @override
   _TranslationInputWidgetState createState() => _TranslationInputWidgetState();
@@ -83,7 +86,8 @@ class _TranslationInputWidgetState extends State<TranslationInputWidget> {
                   ? Color(0xFFB81d4fa)
                   : Color(0xFFBafafaf),
             ),
-            hintText: "Enter word",
+            hintText: "English",
+            //"${widget.boxCollectionModel.boxCollection.elementAt(widget.boxCollectionModel.currentIndex).translateFromLanguage.toString()}",
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(
                 color: Color(0xFFB81d4fa),
@@ -96,12 +100,12 @@ class _TranslationInputWidgetState extends State<TranslationInputWidget> {
           controller: this.wordTranslatedController,
           decoration: InputDecoration(
             prefixIcon: Icon(
-              Icons.arrow_forward,
+              Icons.arrow_back,
               color: _wordTranslatedInputSelected == true
                   ? Color(0xFFB81d4fa)
                   : Color(0xFFBafafaf),
             ),
-            hintText: "Translation",
+            hintText: "German",
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(
                 color: Color(0xFFB81d4fa),
@@ -115,7 +119,8 @@ class _TranslationInputWidgetState extends State<TranslationInputWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               FloatingActionButton(
-                backgroundColor: const Color(0xFFFFD740),
+                backgroundColor:
+                    const Color(0xFFBffd265), // Alternative color: 0xFFFFD740
                 splashColor: Colors.amberAccent,
                 onPressed: this.translate,
                 child: Icon(Icons.translate),

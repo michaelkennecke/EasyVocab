@@ -1,3 +1,4 @@
+import 'package:easy_vocab/providers/box_collection_model.dart';
 import 'package:easy_vocab/providers/box_model.dart';
 import 'package:easy_vocab/providers/exam_box_model.dart';
 import 'package:flutter/material.dart';
@@ -5,9 +6,10 @@ import 'package:flutter/material.dart';
 class TranslationList extends StatefulWidget {
   final BoxModel boxModel;
   final ExamBoxModel examBoxModel;
+  final BoxCollectionModel boxCollectionModel;
 
   // constructor
-  TranslationList(this.boxModel, this.examBoxModel);
+  TranslationList(this.boxModel, this.examBoxModel, this.boxCollectionModel);
 
   @override
   _TranslationListState createState() => _TranslationListState();
@@ -17,10 +19,9 @@ class _TranslationListState extends State<TranslationList>
     with SingleTickerProviderStateMixin {
   @override
   void initState() {
-    widget.boxModel.boxId = "defaultBox"; // TODO: change to variables
-    widget.examBoxModel.boxId = "defaultExamBox"; // TODO: change to variables
     widget.boxModel.loadSharedPreferencesAndData();
     widget.examBoxModel.loadSharedPreferencesAndData();
+    widget.boxCollectionModel.loadSharedPreferencesAndData();
     super.initState();
   }
 

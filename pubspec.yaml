@@ -32,6 +32,7 @@ dependencies:
   percent_indicator: ^2.1.9+1
   shared_preferences: ^2.0.4
   translator: ^0.1.5
+  flag: ^3.2.2
 
 dev_dependencies:
   flutter_test:
